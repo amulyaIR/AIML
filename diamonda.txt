@@ -1,0 +1,94 @@
+import pandas as pd
+user_cols = ['carat','cut','x','y','z']
+diamonds = pd.read_csv("C:/Users/admin/Downloads/archive (7)/diamonds.csv")
+print("First 6 rows:")
+print(diamonds[user_cols].head(6))
+
+print(diamonds['carat'])
+
+diamonds['quality -color'] = diamonds.cut+','+diamonds.color
+print(diamonds.head())
+
+print("Original dataframe:")
+print(diamonds.head())
+print("\n After renaming two of the columns:")
+diamonds.rename(columns={'color':'diamond_color','clarity':'diamond_clarity'},inplace=False)
+print(diamonds.head())
+
+diamonds = pd.read_csv("C:/Users/admin/Downloads/archive (7)/diamonds.csv")
+print("Original dataframe:")
+print(diamonds.head())
+print("\n After removing the second colimn:")
+diamonds.drop('cut',axis=1,inplace=True)
+print(diamonds.head())
+
+diamonds = pd.read_csv("C:/Users/admin/Downloads/archive (7)/diamonds.csv")
+print("Original dataframe:")
+print(diamonds.head())
+print("\n After removing multiple columns:")
+diamonds.drop(['carat','color','y'],axis=1,inplace=True)
+print(diamonds.head())
+
+diamonds = pd.read_csv("C:/Users/admin/Downloads/archive (7)/diamonds.csv")
+print("Original dataframe:")
+print(diamonds.head())
+print("\n After removing multiple rows:")
+diamonds.drop([2,4,5],axis=0,inplace=True)
+print(diamonds.head())
+
+print("\nprice series in descending order:")
+result = diamonds.price.sort_values(ascending = False)
+print(result)
+
+print("sorting the entire diamonds data Frame by the 'carat'series in ascending order`")
+result = diamonds.sort_values('carat')
+print(result)
+print("sorting the entire diamonds Data Frame by the'carat'series in descending order")
+result = diamonds.sort_values('carat',ascending = False)
+print(result)
+
+print("Rows to only show carat weight at least 0.3:")
+booleans = []
+for w in diamonds.carat:
+    if w>=0.3:
+        booleans.append(True)
+    else:
+        booleans.append(False)
+print(booleans[0:20])
+
+print("\n Diamonds that are with a fair or good or premium:")
+result = diamonds[diamonds.cut.isin(["Fair", "Good", "premium"])]
+print(result.head())
+
+print("Details of the diamonds where length>5, width>5 and depth>5:")
+result = diamonds[(diamonds.x>5)&(diamonds.z>5)&(diamonds.z>5)]
+print(result.head())
+
+print("\n subset of 3 rows:")
+result = pd.read_csv("C:/Users/admin/Downloads/archive (7)/diamonds.csv")
+print(result.head())
+
+print("Iteratiung thorugh diamonds dataframe:")
+for index,row in diamonds.iterrows():
+    print(index,row.carat,row.cut,row.color,row.price)
+
+print("Mean of each numeric column of diamonds Data Frame :")
+print(diamonds.mean())
+
+print("Mean of each numeric row of diamonds Data Frame :")
+print(diamonds.mean(axis=1).head())
+
+print("calculate the mean of price for each cut :")
+print(diamonds.groupby('cut').price.mean())
+
+print("\n count, minum,maximum price for each cut of diamonds Dataframe:")
+print(diamonds.groupby('cut').price.agg(['count','min','max']))
+
+
+print("number of missing values in each series of diamonds Data Frame:")
+print(diamonds.isnull().sum())
+
+print("\n Accessing the series index:")
+print(diamonds.carat.value_counts().index)
+print("\n Accessing the series values:")
+print(diamonds.carat.value_counts().values)
