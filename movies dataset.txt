@@ -1,0 +1,90 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("C:/Users/admin/Desktop/movies_metadata.csv")
+
+df.head()
+
+df.tail()
+
+df.describe()
+
+df.dtypes
+
+print(df.isnull().values.any())
+
+df.isnull().sum()
+
+df.isnull()
+
+df.isnull()
+
+df.nunique()
+
+df.status.value_counts()
+
+result = df.info()
+print("Details of the Dataframe")
+print(result)
+
+
+third_movie = df.iloc[2]
+print("Details of third movie:")
+print(third_movie)
+
+result = df.shape
+print("Number of rows and columns of the Dataframe:")
+print(result)
+
+result = df[['title','genres']]
+print("Details of title and genres:")
+print(result)
+
+df = df.set_index("title")
+result= df.loc['Subdue']
+print("Details of the movie 'Subdue':")
+print(result)
+
+small_df = df[["release_date","budget","revenue","runtime"]]
+print("smaller dataframe:")
+print(small_df.head())
+
+result = small_df.sort_values('release_date')
+print("data Frame based on release date :")
+print(result)
+
+result = small_df.sort_values('release_date')
+print("Data frame based on release date :")
+print(result)
+
+result = small_df[small_df['release_date']>'1995-01-01']
+print("Data frame based on release date>1995-01-01'")
+print(result)
+
+result = small_df.sort_values('runtime',ascending=False)
+print("DataFrame sort on runtime")
+print(result)
+
+small_df = df[['runtime']]
+run_time = small_df['runtime']
+print(small_df)
+
+print("longest runtime:")
+print(run_time.max())
+
+print("shortest runtime:")
+print(run_time.min())
+
+result = df['vote_count'].quantile(0.70)
+print(result)
+
+result =small_df[(small_df['runtime']>=30)&(small_df['runtime']<+360)]
+print("list of movies longer than 30 minutes and shorter than 360 mintes:")
+print(result)
+
+n = 500
+small_df = df[['vote_count']]
+result = small_df[small_df['vote_count']>=n]
+print(result)
+
+
